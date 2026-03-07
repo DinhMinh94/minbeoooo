@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiệp 8/3</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+height:100vh;
+background:linear-gradient(135deg,#ff4e75,#ff9ab0);
+font-family:'Dancing Script',cursive;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+/* flower */
+.flower{cursor:pointer;}
+.flower img{width:320px;transition:.5s;}
+.flower:hover img{transform:scale(1.1);}
+
+/* hint */
+.hint{
+font-size:34px;
+color:white;
+text-shadow:0 0 10px pink,0 0 20px red;
+margin-top:20px;
+animation:blink 1.5s infinite;
+}
+
+@keyframes blink{
+0%,100%{opacity:1;}
+50%{opacity:.4;}
+}
+
+/* card */
+.card{
+position:absolute;
+width:600px;
+max-width:90%;
+background:white;
+padding:40px;
+border-radius:20px;
+transform:scale(0);
+box-shadow:0 0 40px rgba(0,0,0,.3);
+text-align:center;
+transition:1s;
+}
+.card.open{transform:scale(1);}
+
+.title{
+font-size:42px;
+color:#ff2e63;
+text-shadow:0 0 10px pink;
+}
+
+.content{
+font-size:26px;
+color:#444;
+margin-top:20px;
+line-height:1.6;
+}
+
+/* hearts */
+.heart{
+position:absolute;
+bottom:-60px;
+animation:flyUp linear forwards;
+z-index:5;
+}
+
+@keyframes flyUp{
+0%{transform:translateY(0) scale(1);opacity:1;}
+100%{transform:translateY(-120vh) scale(1.4);opacity:0;}
+}
+
+/* fireworks */
+.firework{
+position:absolute;
+animation:boom 1.2s forwards;
+pointer-events:none;
+}
+
+.firework img{
+width:140px;
+}
+
+@keyframes boom{
+0%{transform:scale(0);opacity:1;}
+60%{transform:scale(2);opacity:1;}
+100%{transform:scale(4);opacity:0;}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<audio id="music" autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3">
+</audio>
+<div class="flower" onclick="openCard()" id="flower">
+<img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Roses-PNG/Red_Roses_Bouquet_PNG_Clipart.png">
+</div>
+
+<div class="hint" id="hint">
+ Một bó hoa xinh đẹp xin gửi đến em, ấn vào đi nha 💐
+</div>
+
+<div class="card" id="card">
+<div class="title" id="title"></div>
+<div class="content" id="content"></div>
+</div>
+
+<script>
+
+const titleText="Chúc mừng 8/3 Thu Hương";
+const contentText="Chúc em luôn xinh đẹp, vui vẻ và hạnh phúc. Mong mọi điều tốt đẹp nhất sẽ đến với em ❤️";
+
+let i=0;
+let j=0;
+
+function typeTitle(){
+
+if(i<titleText.length){
+
+document.getElementById("title").innerHTML+=titleText.charAt(i);
+i++;
+setTimeout(typeTitle,70);
+
+}else{
+
+setTimeout(typeContent,400);
+
+}
+
+}
+
+function typeContent(){
+
+if(j<contentText.length){
+
+document.getElementById("content").innerHTML+=contentText.charAt(j);
+j++;
+setTimeout(typeContent,40);
+
+}else{
+
+setInterval(fireworks,700);
+
+}
+
+}
+
+function openCard(){
+
+document.getElementById("flower").style.display="none";
+document.getElementById("hint").style.display="none";
+document.getElementById("card").classList.add("open");
+document.getElementById("music").play();
+typeTitle();
+
+}
+
+/* hearts */
+
+function createHeart(){
+
+const heart=document.createElement("div");
+heart.className="heart";
+
+const sizes=[40,60,80];
+const size=sizes[Math.floor(Math.random()*sizes.length)];
+
+heart.innerHTML="<img style='width:"+size+"px' src='https://cdn-icons-png.flaticon.com/512/833/833472.png'>";
+
+heart.style.left=Math.random()*100+"vw";
+
+const duration=Math.random()*5+5;
+heart.style.animationDuration=duration+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),duration*1000);
+
+}
+
+setInterval(createHeart,180);
+
+/* fireworks */
+
+function fireworks(){
+
+const colors=[
+"hue-rotate(0deg)",
+"hue-rotate(90deg)",
+"hue-rotate(180deg)",
+"hue-rotate(270deg)"
+];
+
+const fire=document.createElement("div");
+fire.className="firework";
+
+const color=colors[Math.floor(Math.random()*colors.length)];
+
+fire.innerHTML="<img style='filter:"+color+"' src='https://www.freeiconspng.com/uploads/fireworks-png-0.png'>";
+
+fire.style.left=Math.random()*100+"vw";
+fire.style.top=Math.random()*80+"vh";
+
+document.body.appendChild(fire);
+
+setTimeout(()=>fire.remove(),1200);
+
+}
+
+</script>
+
+</body>
+</html>

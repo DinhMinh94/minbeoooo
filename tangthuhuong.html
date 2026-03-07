@@ -157,9 +157,8 @@ width:90px;
 </head>
 
 <body>
-
-<audio id="music" autoplay loop>
-<source src="https://dinhminh94.github.io/minbeoooo/noinay.mp3">
+<audio id="music" loop>
+<source src="https://dinhminh94.github.io/minbeoooo/noinay.mp3" type="audio/mpeg">
 </audio>
 
 <div class="flower" onclick="openCard()" id="flower">
@@ -221,7 +220,10 @@ document.getElementById("flower").style.display="none";
 document.getElementById("hint").style.display="none";
 document.getElementById("card").classList.add("open");
 
-document.getElementById("music").play();
+const music=document.getElementById("music");
+music.currentTime=0;
+music.play();
+
 
 typeTitle();
 

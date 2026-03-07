@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
 <html lang="vi">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,8 +24,13 @@ align-items:center;
 
 /* flower */
 .flower{cursor:pointer;}
-.flower img{width:320px;transition:.5s;}
-.flower:hover img{transform:scale(1.1);}
+.flower img{
+width:320px;
+transition:.5s;
+}
+.flower:hover img{
+transform:scale(1.1);
+}
 
 /* hint */
 .hint{
@@ -34,6 +39,7 @@ color:white;
 text-shadow:0 0 10px pink,0 0 20px red;
 margin-top:20px;
 animation:blink 1.5s infinite;
+text-align:center;
 }
 
 @keyframes blink{
@@ -54,7 +60,10 @@ box-shadow:0 0 40px rgba(0,0,0,.3);
 text-align:center;
 transition:1s;
 }
-.card.open{transform:scale(1);}
+
+.card.open{
+transform:scale(1);
+}
 
 .title{
 font-size:42px;
@@ -70,6 +79,7 @@ line-height:1.6;
 }
 
 /* hearts */
+
 .heart{
 position:absolute;
 bottom:-60px;
@@ -78,11 +88,18 @@ z-index:5;
 }
 
 @keyframes flyUp{
-0%{transform:translateY(0) scale(1);opacity:1;}
-100%{transform:translateY(-120vh) scale(1.4);opacity:0;}
+0%{
+transform:translateY(0) scale(1);
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) scale(1.4);
+opacity:0;
+}
 }
 
 /* fireworks */
+
 .firework{
 position:absolute;
 animation:boom 1.2s forwards;
@@ -99,6 +116,38 @@ width:140px;
 100%{transform:scale(4);opacity:0;}
 }
 
+/* Responsive mobile */
+
+@media (max-width:768px){
+
+.flower img{
+width:220px;
+}
+
+.hint{
+font-size:22px;
+padding:0 20px;
+}
+
+.card{
+width:90%;
+padding:25px;
+}
+
+.title{
+font-size:28px;
+}
+
+.content{
+font-size:20px;
+}
+
+.firework img{
+width:90px;
+}
+
+}
+
 </style>
 
 </head>
@@ -108,12 +157,13 @@ width:140px;
 <audio id="music" autoplay loop>
 <source src="https://dinhminh94.github.io/minbeoooo/noinay.mp3">
 </audio>
+
 <div class="flower" onclick="openCard()" id="flower">
 <img src="https://gallery.yopriceville.com/var/resizes/Free-Clipart-Pictures/Roses-PNG/Red_Roses_Bouquet_PNG_Clipart.png">
 </div>
 
 <div class="hint" id="hint">
- Một bó hoa xinh đẹp xin gửi đến em, ấn vào đi nha 💐
+Một bó hoa xinh đẹp xin gửi đến em, ấn vào đi nha 💐
 </div>
 
 <div class="card" id="card">
@@ -166,7 +216,9 @@ function openCard(){
 document.getElementById("flower").style.display="none";
 document.getElementById("hint").style.display="none";
 document.getElementById("card").classList.add("open");
+
 document.getElementById("music").play();
+
 typeTitle();
 
 }
